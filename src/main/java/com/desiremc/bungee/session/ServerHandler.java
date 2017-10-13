@@ -27,7 +27,7 @@ public class ServerHandler extends BasicDAO<Server, Long>
             {
                 update();
             }
-        }, 0, 10, TimeUnit.SECONDS);
+        }, 0, 2, TimeUnit.SECONDS);
     }
 
     private void update()

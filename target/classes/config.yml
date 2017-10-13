@@ -1,6 +1,0 @@
-database:
-  host: localhost
-  port: 27017
-  username: admin
-  password: odEylO2Xeh84JLfcu5
-  database: hcf
