@@ -44,7 +44,6 @@ public class ServerHandler extends BasicDAO<Server, Long>
                     @Override
                     public void done(ServerPing result, Throwable error)
                     {
-                        System.out.println("[DesireBungee] " + server.getName() + " pinged back with " + result.getPlayers().getOnline() + "/" + result.getPlayers().getMax());
                         server.setMaxCount(result.getPlayers().getMax());
                         server.setOnline(result.getPlayers().getOnline());
                         save(server);

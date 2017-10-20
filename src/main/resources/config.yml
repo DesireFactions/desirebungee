@@ -4,3 +4,6 @@ database:
   username: admin
   password: odEylO2Xeh84JLfcu5
   database: hcf
+hubs:
+  lobby: 'localhost:25467'
+  lobby2: 'localhost:25468'

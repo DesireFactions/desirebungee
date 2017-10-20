@@ -203,7 +203,27 @@ public class FileHandler
         {
             list.add(getString(key));
         }
+        history.put(key, list);
         return list;
     }
+    
+    public Configuration getConfigurationSection(String key)
+    {
+        key = key.toLowerCase();
+        Object o = history.get(key);
+        if (o != null && o instanceof Configuration)
+        {
+            return (Configuration) o;
+        }
+        Configuration config = fileConfig.getSection(key);
+        if (config == null)
+        {
+            return null;
+        }
+        history.put(key, config);
+        return config;
+        
+    }
 
+    
 }

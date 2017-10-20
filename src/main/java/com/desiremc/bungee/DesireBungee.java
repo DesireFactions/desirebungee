@@ -7,15 +7,20 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import com.desiremc.bungee.connection.MongoWrapper;
+import com.desiremc.bungee.listeners.ConnectionListener;
+import com.desiremc.bungee.ping.StatusManager;
 import com.desiremc.bungee.session.ServerHandler;
 import com.desiremc.bungee.utils.FileHandler;
 import com.google.common.io.ByteStreams;
 
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public class DesireBungee extends Plugin
 {
 
+    public static final boolean DEBUG = true;
+    
     private static DesireBungee instance;
 
     private static FileHandler config;
@@ -31,6 +36,8 @@ public class DesireBungee extends Plugin
         mongoWrapper = new MongoWrapper();
         
         ServerHandler.getInstance();
+        StatusManager.startPingTask();
+        ProxyServer.getInstance().getPluginManager().registerListener(this, new ConnectionListener());
     }
 
     public MongoWrapper getMongoWrapper()
