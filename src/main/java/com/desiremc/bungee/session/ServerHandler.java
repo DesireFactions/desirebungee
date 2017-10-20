@@ -28,6 +28,8 @@ public class ServerHandler extends BasicDAO<Server, Long>
                 update();
             }
         }, 0, 2, TimeUnit.SECONDS);
+        
+        DesireBungee.getInstance().getMongoWrapper().getMorphia().map(Server.class);
     }
 
     private void update()

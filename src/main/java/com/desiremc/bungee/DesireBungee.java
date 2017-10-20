@@ -36,6 +36,8 @@ public class DesireBungee extends Plugin
         mongoWrapper = new MongoWrapper();
         
         ServerHandler.getInstance();
+        mongoWrapper.getDatastore().ensureIndexes();
+        
         StatusManager.startPingTask();
         ProxyServer.getInstance().getPluginManager().registerListener(this, new ConnectionListener());
     }
