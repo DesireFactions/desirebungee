@@ -22,6 +22,11 @@ public class StatusManager
         return spm;
     }
 
+    public static void removeServer(String server)
+    {
+        servers.remove(server);
+    }
+    
     public static boolean isOnline(String server)
     {
         if (servers.containsKey(server))
@@ -128,10 +133,6 @@ public class StatusManager
             @Override
             public void run()
             {
-                if (DesireBungee.DEBUG)
-                {
-                    System.out.println("Pinging servers in startPingTask()");
-                }
                 try
                 {
                     Configuration cs = DesireBungee.getConfigHandler().getConfigurationSection("hubs");

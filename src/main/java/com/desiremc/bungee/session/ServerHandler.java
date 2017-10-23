@@ -28,7 +28,7 @@ public class ServerHandler extends BasicDAO<Server, Long>
                 update();
             }
         }, 0, 2, TimeUnit.SECONDS);
-        
+
         DesireBungee.getInstance().getMongoWrapper().getMorphia().map(Server.class);
     }
 
@@ -46,9 +46,12 @@ public class ServerHandler extends BasicDAO<Server, Long>
                     @Override
                     public void done(ServerPing result, Throwable error)
                     {
-                        server.setMaxCount(result.getPlayers().getMax());
-                        server.setOnline(result.getPlayers().getOnline());
-                        save(server);
+                        if (result != null)
+                        {
+                            server.setMaxCount(result.getPlayers().getMax());
+                            server.setOnline(result.getPlayers().getOnline());
+                            save(server);
+                        }
                     }
                 });
             }

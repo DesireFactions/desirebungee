@@ -19,7 +19,7 @@ import net.md_5.bungee.api.plugin.Plugin;
 public class DesireBungee extends Plugin
 {
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     
     private static DesireBungee instance;
 
