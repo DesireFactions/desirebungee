@@ -16,6 +16,8 @@ public class Server
 
     private int slots;
 
+    private boolean status;
+
     public Server(String name, int slots, int online)
     {
         this.name = name;
@@ -62,4 +64,13 @@ public class Server
         this.online = online;
     }
 
+    public boolean getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(boolean status)
+    {
+        this.status = status;
+    }
 }

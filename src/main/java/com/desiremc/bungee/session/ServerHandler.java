@@ -50,6 +50,14 @@ public class ServerHandler extends BasicDAO<Server, Long>
                         {
                             server.setMaxCount(result.getPlayers().getMax());
                             server.setOnline(result.getPlayers().getOnline());
+                            server.setStatus(true);
+                            save(server);
+                        }
+                        else 
+                        {
+                            server.setMaxCount(0);
+                            server.setOnline(0);
+                            server.setStatus(false);
                             save(server);
                         }
                     }
