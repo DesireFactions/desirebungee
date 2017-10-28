@@ -24,11 +24,19 @@
 			<artifactId>morphia</artifactId>
 			<version>1.3.2</version>
 		</dependency>
-		<!-- BungeeCord API -->
+		<!-- BungeeCord Proxy -->
+		<dependency>
+			<groupId>net.md-5</groupId>
+			<artifactId>bungeecord-proxy</artifactId>
+			<version>1.8-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<!-- BungeeCord Proxy -->
 		<dependency>
 			<groupId>net.md-5</groupId>
 			<artifactId>bungeecord-api</artifactId>
-			<version>1.12-SNAPSHOT</version>
+			<version>1.8-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>

@@ -13,19 +13,26 @@ import com.desiremc.bungee.session.ServerHandler;
 import com.desiremc.bungee.utils.FileHandler;
 import com.google.common.io.ByteStreams;
 
+import net.md_5.bungee.UserConnection;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.event.ChatEvent;
+import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
+import net.md_5.bungee.api.scheduler.ScheduledTask;
+import net.md_5.bungee.event.EventHandler;
 
-public class DesireBungee extends Plugin
+public class DesireBungee extends Plugin implements Listener
 {
 
     public static final boolean DEBUG = false;
-    
+
     private static DesireBungee instance;
 
     private static FileHandler config;
 
     private static MongoWrapper mongoWrapper;
+
+    public static boolean shuttingDown;
 
     @Override
     public void onEnable()
@@ -33,13 +40,44 @@ public class DesireBungee extends Plugin
         instance = this;
         config = new FileHandler(saveDefaultConfig());
 
-        mongoWrapper = new MongoWrapper();
-        
-        ServerHandler.getInstance();
-        mongoWrapper.getDatastore().ensureIndexes();
-        
+        ProxyServer.getInstance().getScheduler().runAsync(this, new Runnable()
+        {
+
+            @Override
+            public void run()
+            {
+                mongoWrapper = new MongoWrapper();
+
+                ServerHandler.getInstance();
+                mongoWrapper.getDatastore().ensureIndexes();
+
+            }
+        });
+
         StatusManager.startPingTask();
         ProxyServer.getInstance().getPluginManager().registerListener(this, new ConnectionListener());
+        //ProxyServer.getInstance().getPluginManager().registerListener(this, this);
+    }
+
+    @EventHandler
+    public void onDisable()
+    {
+        shuttingDown = true;
+    }
+
+    @EventHandler
+    public void onCommand(ChatEvent event)
+    {
+        System.out.println(event.getMessage());
+        if (event.isCommand() && !event.isCancelled() && event.getMessage().equals("/end"))
+        {
+            if ((event.getSender() instanceof UserConnection))
+                ProxyServer.getInstance().getScheduler().cancel(this);
+            for (ScheduledTask task : ServerHandler.tasks)
+            {
+                task.cancel();
+            }
+        }
     }
 
     public MongoWrapper getMongoWrapper()
