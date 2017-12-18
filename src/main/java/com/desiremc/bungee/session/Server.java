@@ -14,6 +14,8 @@ public class Server
 
     private int online;
 
+    private ServerType type;
+
     private int slots;
 
     private boolean status;
@@ -54,6 +56,16 @@ public class Server
         this.name = name;
     }
 
+    public void setType(ServerType type)
+    {
+        this.type = type;
+    }
+
+    public ServerType getType()
+    {
+        return type;
+    }
+
     public void setMaxCount(int slots)
     {
         this.slots = slots;
@@ -72,5 +84,11 @@ public class Server
     public void setStatus(boolean status)
     {
         this.status = status;
+    }
+
+    public enum ServerType
+    {
+        HUB,
+        HCF
     }
 }
