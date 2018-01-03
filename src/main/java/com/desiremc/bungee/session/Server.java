@@ -20,6 +20,8 @@ public class Server
 
     private boolean status;
 
+    private boolean whitelisted;
+
     public Server(String name, int slots, int online)
     {
         this.name = name;
