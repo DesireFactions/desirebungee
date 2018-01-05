@@ -22,6 +22,8 @@ public class Server
 
     private boolean whitelisted;
 
+    private boolean partnerWhitelisted;
+
     public Server(String name, int slots, int online)
     {
         this.name = name;
